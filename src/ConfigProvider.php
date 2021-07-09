@@ -20,6 +20,14 @@ class ConfigProvider
                     ],
                 ],
             ],
+            'publish' => [
+                [
+                    'id' => 'config',
+                    'description' => 'Pay 配置文件.',
+                    'source' => __DIR__ . '/../publish/pay.php',
+                    'destination' => BASE_PATH . '/config/autoload/pay.php',
+                ],
+            ],
         ];
     }
 }
