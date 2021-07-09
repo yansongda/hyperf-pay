@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "HyperfTest\\": "tests"
+            "Yansongda\\HyperfPay\\Test\\": "tests"
         }
     },
     "require": {
