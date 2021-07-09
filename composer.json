@@ -21,7 +21,8 @@
     },
     "require": {
         "php": ">=7.3",
-        "hyperf/guzzle": "^2.1"
+        "hyperf/guzzle": "^2.1",
+        "yansongda/pay": "~3.0.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
