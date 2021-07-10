@@ -15,12 +15,12 @@ return [
             'app_public_cert_path' => '',
             // 支付宝公钥证书 路径
             'alipay_public_cert_path' => '',
-            // 应用根证书 路径
+            // 支付宝根证书 路径
             'alipay_root_cert_path' => '',
             'return_url' => '',
             'notify_url' => '',
             'mode' => Pay::MODE_NORMAL,
-        ]
+        ],
     ],
     'wechat' => [
         'default' => [
@@ -45,6 +45,11 @@ return [
             // 微信公钥证书路径
             'wechat_public_cert_path' => '',
             'mode' => Pay::MODE_NORMAL,
-        ]
+        ],
+    ],
+    'http' => [ // optional
+        'timeout' => 5.0,
+        'connect_timeout' => 5.0,
+        // 更多配置项请参考 [Guzzle](https://guzzle-cn.readthedocs.io/zh_CN/latest/request-options.html)
     ],
 ];

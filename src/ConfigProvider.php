@@ -10,6 +10,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
+                \Yansongda\Pay\Pay::class => Pay::class,
             ],
             'commands' => [
             ],
@@ -24,8 +25,8 @@ class ConfigProvider
                 [
                     'id' => 'config',
                     'description' => 'Pay 配置文件.',
-                    'source' => __DIR__ . '/../publish/pay.php',
-                    'destination' => BASE_PATH . '/config/autoload/pay.php',
+                    'source' => __DIR__.'/../publish/pay.php',
+                    'destination' => BASE_PATH.'/config/autoload/pay.php',
                 ],
             ],
         ];
