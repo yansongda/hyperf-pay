@@ -10,6 +10,49 @@
 - composer
 - hyperf >= 2.1
 
+## 安装
+
+```shell
+composer require yansongda/hyperf-pay:~1.0.0
+```
+
+## 说明
+
+### 发布配置文件
+
+```shell
+php bin/hyperf.php vendor:publish yansongda/hyperf-pay
+```
+
+### 使用
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller;
+
+use Yansongda\HyperfPay\Pay;
+use Hyperf\HttpServer\Annotation\AutoController;
+
+/**
+ * @AutoController()
+ */
+class IndexController extends AbstractController
+{
+    public function index(Pay $pay)
+    {
+        return $pay->alipay()->web([
+            'out_trade_no' => ''.time(),
+            'total_amount' => '0.01',
+            'subject' => 'yansongda 测试 - 1',
+        ]);
+    }
+}
+
+```
+
 ## 详细文档
 
 [https://pay.yansongda.cn](https://pay.yansongda.cn)
