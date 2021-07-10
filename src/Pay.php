@@ -35,7 +35,7 @@ class Pay
     public function __construct(ConfigInterface $config, ClientFactory $clientFactory)
     {
         $this->config = $config->get('pay');
-        $this->http = $clientFactory->create($this->config->get('http', []));
+        $this->http = $clientFactory->create($this->config['http'] ?? []);
 
         BigPay::config($this->config);
 
