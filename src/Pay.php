@@ -57,7 +57,7 @@ class Pay
     /**
      * @throws \Yansongda\Pay\Exception\ContainerException
      */
-    public function bootstrapHttpClient(): void
+    protected function bootstrapHttpClient(): void
     {
         BigPay::set(HttpClientInterface::class, $this->http);
     }
