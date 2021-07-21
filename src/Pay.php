@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Yansongda\HyperfPay;
 
-use Hyperf\Contract\ConfigInterface;
-use Hyperf\Contract\StdoutLoggerInterface;
+use GuzzleHttp\Client;
 use Hyperf\Guzzle\ClientFactory;
-use Hyperf\Utils\ApplicationContext;
-use Psr\EventDispatcher\EventDispatcherInterface;
-use Yansongda\Pay\Contract\HttpClientInterface;
-use Yansongda\Pay\Contract\LoggerInterface;
 use Yansongda\Pay\Pay as BigPay;
 use Yansongda\Pay\Provider\Alipay;
 use Yansongda\Pay\Provider\Wechat;
+use Hyperf\Contract\ConfigInterface;
+use Hyperf\Utils\ApplicationContext;
+use Hyperf\Contract\StdoutLoggerInterface;
+use Yansongda\Pay\Contract\LoggerInterface;
+use Yansongda\Pay\Contract\HttpClientInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 class Pay
 {
@@ -23,7 +24,7 @@ class Pay
     protected $config;
 
     /**
-     * @var
+     * @var Client
      */
     protected $http;
 
