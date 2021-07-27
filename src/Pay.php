@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Yansongda\HyperfPay;
 
-use GuzzleHttp\Client;
+use Hyperf\Contract\ConfigInterface;
+use Hyperf\Contract\ContainerInterface;
 use Hyperf\Guzzle\ClientFactory;
+use Hyperf\Logger\LoggerFactory;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Yansongda\Pay\Contract\HttpClientInterface;
+use Yansongda\Pay\Contract\LoggerInterface;
 use Yansongda\Pay\Pay as BigPay;
 use Yansongda\Pay\Provider\Alipay;
 use Yansongda\Pay\Provider\Wechat;
-use Hyperf\Contract\ConfigInterface;
-use Hyperf\Utils\ApplicationContext;
-use Hyperf\Contract\StdoutLoggerInterface;
-use Yansongda\Pay\Contract\LoggerInterface;
-use Yansongda\Pay\Contract\HttpClientInterface;
-use Psr\EventDispatcher\EventDispatcherInterface;
 
 class Pay
 {
@@ -24,19 +23,18 @@ class Pay
     protected $config;
 
     /**
-     * @var Client
+     * @var \Hyperf\Contract\ContainerInterface
      */
-    protected $http;
+    protected $container;
 
     /**
      * @throws \Yansongda\Pay\Exception\ServiceNotFoundException
      * @throws \Yansongda\Pay\Exception\ContainerException
      * @throws \Yansongda\Pay\Exception\ContainerDependencyException
      */
-    public function __construct(ConfigInterface $config, ClientFactory $clientFactory)
+    public function __construct(ContainerInterface $container)
     {
-        $this->config = $config->get('pay');
-        $this->http = $clientFactory->create($this->config['http'] ?? []);
+        $this->config = $container->get(ConfigInterface::class)->get('pay', []);
 
         BigPay::config($this->config);
 
@@ -60,7 +58,10 @@ class Pay
      */
     protected function bootstrapHttpClient(): void
     {
-        BigPay::set(HttpClientInterface::class, $this->http);
+        BigPay::set(
+            HttpClientInterface::class,
+            $this->container->get(ClientFactory::class)->create($this->config['http'] ?? [])
+        );
     }
 
     /**
@@ -68,10 +69,12 @@ class Pay
      */
     protected function bootstrapLogger(): void
     {
-        $container = ApplicationContext::getContainer();
-
-        if ($container->has(StdoutLoggerInterface::class)) {
-            BigPay::set(LoggerInterface::class, $container->get(StdoutLoggerInterface::class));
+        if (true === ($this->config['logger']['enable'] ?? false) &&
+            $this->container->has(LoggerFactory::class)) {
+            BigPay::set(
+                LoggerInterface::class,
+                $this->container->get(LoggerFactory::class)->get('pay', $this->config['logger']['config'] ?? 'default')
+            );
         }
     }
 
@@ -80,10 +83,11 @@ class Pay
      */
     protected function bootstrapEvent(): void
     {
-        $container = ApplicationContext::getContainer();
-
-        if ($container->has(EventDispatcherInterface::class)) {
-            BigPay::set(\Yansongda\Pay\Contract\EventDispatcherInterface::class, $container->get(EventDispatcherInterface::class));
+        if ($this->container->has(EventDispatcherInterface::class)) {
+            BigPay::set(
+                \Yansongda\Pay\Contract\EventDispatcherInterface::class,
+                $this->container->get(EventDispatcherInterface::class)
+            );
         }
     }
 }

@@ -52,4 +52,8 @@ return [
         'connect_timeout' => 5.0,
         // 更多配置项请参考 [Guzzle](https://guzzle-cn.readthedocs.io/zh_CN/latest/request-options.html)
     ],
+    'logger' => [
+        'enable' => false,
+        'config' => 'default',
+    ],
 ];
