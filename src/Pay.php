@@ -36,6 +36,7 @@ class Pay
     {
         $this->config = $container->get(ConfigInterface::class)->get('pay', []);
         $this->container = $container;
+        
         BigPay::config($this->config);
 
         $this->bootstrapHttpClient();
