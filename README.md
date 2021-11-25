@@ -1,8 +1,6 @@
 <p align="center">
-<a href="https://pay.yansongda.cn" target="_blank" rel="noopener noreferrer"><img width="200" src="https://pay.yansongda.cn/images/logo.png" alt="Logo"></a>
+<a href="https://pay.yansongda.cn" target="_blank" rel="noopener noreferrer"><img width="200" src="https://cdn.jsdelivr.net/gh/yansongda/pay-site/.vuepress/public/images/logo.png" alt="Logo"></a>
 </p>
-
-当前组件整体处于 beta 阶段
 
 ## 运行环境
 
