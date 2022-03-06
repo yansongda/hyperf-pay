@@ -17,26 +17,20 @@ use Yansongda\Pay\Provider\Wechat;
 
 class Pay
 {
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config;
+
+    protected ContainerInterface $container;
 
     /**
-     * @var \Hyperf\Contract\ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * @throws \Yansongda\Pay\Exception\ServiceNotFoundException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \Yansongda\Pay\Exception\ContainerException
-     * @throws \Yansongda\Pay\Exception\ContainerDependencyException
      */
     public function __construct(ContainerInterface $container)
     {
         $this->config = $container->get(ConfigInterface::class)->get('pay', []);
         $this->container = $container;
-        
+
         BigPay::config($this->config);
 
         $this->bootstrapHttpClient();
@@ -55,6 +49,8 @@ class Pay
     }
 
     /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \Yansongda\Pay\Exception\ContainerException
      */
     protected function bootstrapHttpClient(): void
@@ -66,6 +62,8 @@ class Pay
     }
 
     /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \Yansongda\Pay\Exception\ContainerException
      */
     protected function bootstrapLogger(): void
@@ -80,6 +78,8 @@ class Pay
     }
 
     /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \Yansongda\Pay\Exception\ContainerException
      */
     protected function bootstrapEvent(): void
