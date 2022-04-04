@@ -11,6 +11,7 @@ class ConfigProvider
         return [
             'dependencies' => [
                 \Yansongda\Pay\Pay::class => Pay::class,
+                PayInterface::class => Pay::class,
             ],
             'commands' => [
             ],
