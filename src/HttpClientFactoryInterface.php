@@ -2,7 +2,7 @@
 
 namespace Yansongda\HyperfPay;
 
-use Yansongda\Pay\Contract\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Yansongda\Pay\Contract\HttpClientInterface;
 
 interface HttpClientFactoryInterface

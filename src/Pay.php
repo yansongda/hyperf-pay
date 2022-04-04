@@ -55,8 +55,8 @@ class Pay
      */
     protected function bootstrapHttpClient(): void
     {
-        if ($this->container->has(HttpClientInterface::class)) {
-            $client = $this->container->get(HttpClientInterface::class);
+        if ($this->container->has(HttpClientFactoryInterface::class) && $factory = $this->container->get(HttpClientFactoryInterface::class)) {
+            $client = $factory->create($this->container, $this->config);
         } else {
             $client = $this->container->get(ClientFactory::class)->create($this->config['http'] ?? []);
         }

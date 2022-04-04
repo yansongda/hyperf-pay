@@ -3,7 +3,7 @@
 namespace Yansongda\HyperfPay;
 
 use GuzzleHttp\Client;
-use Hyperf\Contract\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Yansongda\Pay\Contract\HttpClientInterface;
