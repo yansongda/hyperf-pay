@@ -15,7 +15,7 @@ use Yansongda\Pay\Pay as BigPay;
 use Yansongda\Pay\Provider\Alipay;
 use Yansongda\Pay\Provider\Wechat;
 
-class Pay
+class Pay implements PayInterface
 {
     protected array $config;
 
