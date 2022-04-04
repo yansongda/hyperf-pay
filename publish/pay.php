@@ -23,7 +23,7 @@ return [
             'service_provider_id' => '',
             // 选填-默认为正常模式。可选为： MODE_NORMAL, MODE_SANDBOX, MODE_SERVICE
             'mode' => Pay::MODE_NORMAL,
-        ]
+        ],
     ],
     'wechat' => [
         'default' => [
@@ -45,7 +45,7 @@ return [
             'app_id' => '',
             // 选填-合单 app_id
             'combine_app_id' => '',
-            // 选填-合单商户号 
+            // 选填-合单商户号
             'combine_mch_id' => '',
             // 选填-服务商模式下，子公众号 的 app_id
             'sub_mp_app_id' => '',
@@ -61,7 +61,7 @@ return [
             ],
             // 选填-默认为正常模式。可选为： MODE_NORMAL, MODE_SERVICE
             'mode' => Pay::MODE_NORMAL,
-        ]
+        ],
     ],
     'http' => [ // optional
         'timeout' => 5.0,
