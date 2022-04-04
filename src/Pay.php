@@ -55,10 +55,12 @@ class Pay
      */
     protected function bootstrapHttpClient(): void
     {
-        BigPay::set(
-            HttpClientInterface::class,
-            $this->container->get(ClientFactory::class)->create($this->config['http'] ?? [])
-        );
+        if ($this->container->has(HttpClientInterface::class)) {
+            $client = $this->container->get(HttpClientInterface::class);
+        } else {
+            $client = $this->container->get(ClientFactory::class)->create($this->config['http'] ?? []);
+        }
+        BigPay::set(HttpClientInterface::class, $client);
     }
 
     /**
