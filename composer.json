@@ -6,9 +6,12 @@
         "php",
         "hyperf",
         "pay",
-        "yansongda"
+        "yansongda",
+        "alipay",
+        "unipay",
+        "wechat"
     ],
-    "description": "可能是基于 hyperf 的最优雅的支付宝、微信支付 SDK 了",
+    "description": "可能是基于 hyperf 的最优雅的支付宝、微信、银联支付 SDK 了",
     "autoload": {
         "psr-4": {
             "Yansongda\\HyperfPay\\": "src/"

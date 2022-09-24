@@ -13,6 +13,7 @@ use Yansongda\Pay\Contract\HttpClientInterface;
 use Yansongda\Pay\Contract\LoggerInterface;
 use Yansongda\Pay\Pay as BigPay;
 use Yansongda\Pay\Provider\Alipay;
+use Yansongda\Pay\Provider\Unipay;
 use Yansongda\Pay\Provider\Wechat;
 
 class Pay implements PayInterface
@@ -46,6 +47,11 @@ class Pay implements PayInterface
     public function wechat(array $config = []): Wechat
     {
         return BigPay::wechat($config);
+    }
+
+    public function unipay(array $config = []): Unipay
+    {
+        return BigPay::unipay($config);
     }
 
     /**
