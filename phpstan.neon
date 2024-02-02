@@ -1,0 +1,5 @@
+parameters:
+    reportUnmatchedIgnoredErrors: false
+    excludePaths:
+    ignoreErrors:
+        - '#Constant BASE_PATH not found#'

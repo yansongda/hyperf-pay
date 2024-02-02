@@ -4,14 +4,14 @@
 
 ## 运行环境
 
-- php >= 7.4
+- php >= 8.0
 - composer
-- hyperf >= 2.1
+- hyperf >= 3.0
 
 ## 安装
 
 ```shell
-composer require yansongda/hyperf-pay:~1.5.0
+composer require yansongda/hyperf-pay:~1.6.0
 ```
 
 ## 说明

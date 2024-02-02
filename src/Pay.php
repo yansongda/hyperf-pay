@@ -6,11 +6,13 @@ namespace Yansongda\HyperfPay;
 
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Contract\ContainerInterface;
-use Hyperf\Guzzle\ClientFactory;
 use Hyperf\Logger\LoggerFactory;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Yansongda\Pay\Contract\HttpClientInterface;
-use Yansongda\Pay\Contract\LoggerInterface;
+use Yansongda\Artful\Contract\HttpClientFactoryInterface;
+use Yansongda\Artful\Contract\LoggerInterface;
+use Yansongda\Artful\Exception\ContainerException;
 use Yansongda\Pay\Pay as BigPay;
 use Yansongda\Pay\Provider\Alipay;
 use Yansongda\Pay\Provider\Unipay;
@@ -23,9 +25,9 @@ class Pay implements PayInterface
     protected ContainerInterface $container;
 
     /**
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     * @throws \Yansongda\Pay\Exception\ContainerException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerException
      */
     public function __construct(ContainerInterface $container)
     {
@@ -55,29 +57,24 @@ class Pay implements PayInterface
     }
 
     /**
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     * @throws \Yansongda\Pay\Exception\ContainerException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerException
      */
     protected function bootstrapHttpClient(): void
     {
-        if ($this->container->has(HttpClientFactoryInterface::class) && $factory = $this->container->get(HttpClientFactoryInterface::class)) {
-            $client = $factory->create($this->container, $this->config);
-        } else {
-            $client = $this->container->get(ClientFactory::class)->create($this->config['http'] ?? []);
-        }
-        BigPay::set(HttpClientInterface::class, $client);
+        BigPay::set(HttpClientFactoryInterface::class, $this->container->get(HttpClientFactory::class));
     }
 
     /**
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     * @throws \Yansongda\Pay\Exception\ContainerException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerException
      */
     protected function bootstrapLogger(): void
     {
-        if (true === ($this->config['logger']['enable'] ?? false) &&
-            $this->container->has(LoggerFactory::class)) {
+        if (true === ($this->config['logger']['enable'] ?? false)
+            && $this->container->has(LoggerFactory::class)) {
             BigPay::set(
                 LoggerInterface::class,
                 $this->container->get(LoggerFactory::class)->get('pay', $this->config['logger']['config'] ?? 'default')
@@ -86,15 +83,15 @@ class Pay implements PayInterface
     }
 
     /**
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     * @throws \Yansongda\Pay\Exception\ContainerException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerException
      */
     protected function bootstrapEvent(): void
     {
         if ($this->container->has(EventDispatcherInterface::class)) {
             BigPay::set(
-                \Yansongda\Pay\Contract\EventDispatcherInterface::class,
+                \Yansongda\Artful\Contract\EventDispatcherInterface::class,
                 $this->container->get(EventDispatcherInterface::class)
             );
         }
