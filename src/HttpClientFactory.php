@@ -1,14 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yansongda\HyperfPay;
 
+use Hyperf\Guzzle\ClientFactory;
 use Psr\Container\ContainerInterface;
-use Yansongda\Pay\Contract\HttpClientInterface;
+use Psr\Http\Client\ClientInterface;
+use Yansongda\Artful\Contract\HttpClientFactoryInterface;
 
 class HttpClientFactory implements HttpClientFactoryInterface
 {
-    public function create(ContainerInterface $container, array $config): HttpClientInterface
+    public function __construct(protected ContainerInterface $container) {}
+
+    public function create(array $options = []): ClientInterface
     {
-        return new HttpClient($container, $config);
+        return $this->container->get(ClientFactory::class)->create($options);
     }
 }

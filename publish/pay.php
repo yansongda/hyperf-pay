@@ -69,6 +69,8 @@ return [
         'default' => [
             // 必填-商户号
             'mch_id' => '',
+            // 选填-商户密钥：为银联条码支付综合前置平台配置：https://up.95516.com/open/openapi?code=unionpay
+            'mch_secret_key' => '',
             // 必填-商户公私钥
             'mch_cert_path' => '',
             // 必填-商户公私钥密码
