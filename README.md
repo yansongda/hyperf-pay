@@ -11,7 +11,7 @@
 ## 安装
 
 ```shell
-composer require yansongda/hyperf-pay:~1.6.0
+composer require yansongda/hyperf-pay:~1.7.0
 ```
 
 ## 说明

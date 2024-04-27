@@ -25,7 +25,7 @@
     "require": {
         "php": ">=8.0",
         "hyperf/guzzle": "^3.0",
-        "yansongda/pay": "~3.6.0"
+        "yansongda/pay": "~3.7.0"
     },
     "require-dev": {
         "composer/composer": "^2.0",
